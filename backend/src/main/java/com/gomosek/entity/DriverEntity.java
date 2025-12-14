@@ -10,11 +10,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import lombok.*;
 
 @Entity
 @Table(name = "drivers", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"module_id", "driver_id"})
 })
+@Getter
+@Setter
 public class DriverEntity {
 
     @Id
@@ -41,42 +44,6 @@ public class DriverEntity {
         this.module = module;
         this.driverId = driverId;
         this.name = name;
-        this.type = type;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public ModuleEntity getModule() {
-        return module;
-    }
-
-    public void setModule(ModuleEntity module) {
-        this.module = module;
-    }
-
-    public Integer getDriverId() {
-        return driverId;
-    }
-
-    public void setDriverId(Integer driverId) {
-        this.driverId = driverId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
         this.type = type;
     }
 }

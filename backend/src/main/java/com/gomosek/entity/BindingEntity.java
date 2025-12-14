@@ -13,11 +13,14 @@ import jakarta.persistence.UniqueConstraint;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import lombok.*;
 
 @Entity
 @Table(name = "bindings", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"module_id", "port_fk"})
+    @UniqueConstraint(columnNames = {"module_id", "port_fk"})
 })
+@Getter
+@Setter
 public class BindingEntity {
 
     @Id
@@ -47,37 +50,5 @@ public class BindingEntity {
         this.module = module;
         this.port = port;
         this.driver = driver;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public ModuleEntity getModule() {
-        return module;
-    }
-
-    public void setModule(ModuleEntity module) {
-        this.module = module;
-    }
-
-    public PortEntity getPort() {
-        return port;
-    }
-
-    public void setPort(PortEntity port) {
-        this.port = port;
-    }
-
-    public DriverEntity getDriver() {
-        return driver;
-    }
-
-    public void setDriver(DriverEntity driver) {
-        this.driver = driver;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
     }
 }

@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -19,6 +21,8 @@ import java.util.List;
 @Table(name = "modules", uniqueConstraints = {
         @UniqueConstraint(columnNames = "module_uid")
 })
+@Getter
+@Setter
 public class ModuleEntity {
 
     @Id
@@ -53,48 +57,4 @@ public class ModuleEntity {
 
     @OneToMany(mappedBy = "module", orphanRemoval = true)
     private List<BindingEntity> bindings = new ArrayList<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public Integer getModuleUid() {
-        return moduleUid;
-    }
-
-    public void setModuleUid(Integer moduleUid) {
-        this.moduleUid = moduleUid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
-    }
-
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
-    public Instant getLastSeen() {
-        return lastSeen;
-    }
-
-    public void setLastSeen(Instant lastSeen) {
-        this.lastSeen = lastSeen;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
 }

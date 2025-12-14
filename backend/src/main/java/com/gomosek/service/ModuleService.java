@@ -22,6 +22,7 @@ import com.gomosek.repository.MeasurementRepository;
 import com.gomosek.repository.ModuleRepository;
 import com.gomosek.repository.PortRepository;
 import com.gomosek.exception.NotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -33,6 +34,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class ModuleService {
 
     private final ModuleRepository moduleRepository;
@@ -41,20 +43,6 @@ public class ModuleService {
     private final BindingRepository bindingRepository;
     private final MeasurementRepository measurementRepository;
     private final EspModuleService espModuleService;
-
-    public ModuleService(ModuleRepository moduleRepository,
-                         PortRepository portRepository,
-                         DriverRepository driverRepository,
-                         BindingRepository bindingRepository,
-                         MeasurementRepository measurementRepository,
-                         EspModuleService espModuleService) {
-        this.moduleRepository = moduleRepository;
-        this.portRepository = portRepository;
-        this.driverRepository = driverRepository;
-        this.bindingRepository = bindingRepository;
-        this.measurementRepository = measurementRepository;
-        this.espModuleService = espModuleService;
-    }
 
     public List<ModuleSummaryDto> listModules() {
         return moduleRepository.findAll()

@@ -9,12 +9,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 
 @Entity
 @Table(name = "measurements")
+@Getter
+@Setter
 public class MeasurementEntity {
 
     @Id
@@ -48,45 +52,5 @@ public class MeasurementEntity {
         this.port = port;
         this.driver = driver;
         this.value = value;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public ModuleEntity getModule() {
-        return module;
-    }
-
-    public void setModule(ModuleEntity module) {
-        this.module = module;
-    }
-
-    public PortEntity getPort() {
-        return port;
-    }
-
-    public void setPort(PortEntity port) {
-        this.port = port;
-    }
-
-    public DriverEntity getDriver() {
-        return driver;
-    }
-
-    public void setDriver(DriverEntity driver) {
-        this.driver = driver;
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
     }
 }

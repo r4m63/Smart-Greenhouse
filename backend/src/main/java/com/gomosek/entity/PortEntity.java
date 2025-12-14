@@ -10,11 +10,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "ports", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"module_id", "port_id"})
 })
+@Getter
+@Setter
 public class PortEntity {
 
     @Id
@@ -40,31 +44,4 @@ public class PortEntity {
         this.type = type;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public ModuleEntity getModule() {
-        return module;
-    }
-
-    public void setModule(ModuleEntity module) {
-        this.module = module;
-    }
-
-    public Integer getPortId() {
-        return portId;
-    }
-
-    public void setPortId(Integer portId) {
-        this.portId = portId;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
 }
