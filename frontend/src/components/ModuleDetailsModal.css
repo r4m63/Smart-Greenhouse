@@ -75,6 +75,14 @@
   background-color: var(--eco-cream);
   border-radius: 12px;
   border-left: 4px solid var(--eco-primary);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.module-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .info-item {

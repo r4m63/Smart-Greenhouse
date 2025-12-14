@@ -95,6 +95,10 @@ export const moduleApi = {
 
   write: async (moduleId: number, portId: number, request: WriteRequest): Promise<void> => {
     await api.post(`/modules/${moduleId}/ports/${portId}/write`, request);
+  },
+
+  delete: async (moduleId: number): Promise<void> => {
+    await api.delete(`/modules/${moduleId}`);
   }
 };
 
