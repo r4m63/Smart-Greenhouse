@@ -1,1 +1,1 @@
-rootProject.name = "gomik"
+rootProject.name = "backend"
