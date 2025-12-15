@@ -1,58 +1,87 @@
 import { useState, useEffect } from 'react';
-import { moduleApi } from '../services/api';
+import { moduleApi, automationApi } from '../services/api';
 import type { ModuleSummary, AutomationRule } from '../types/api';
 import AutomationRuleForm from '../components/AutomationRuleForm';
 import AutomationRuleList from '../components/AutomationRuleList';
 import './ControlPage.css';
 
-let automationRules: AutomationRule[] = [];
-let nextRuleId = 1;
-
 function ControlPage() {
   const [modules, setModules] = useState<ModuleSummary[]>([]);
-  const [rules, setRules] = useState<AutomationRule[]>(automationRules);
+  const [rules, setRules] = useState<AutomationRule[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showAddRule, setShowAddRule] = useState(false);
 
   useEffect(() => {
-    loadModules();
+    const init = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        await Promise.all([loadModules(), loadRules()]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    void init();
   }, []);
 
   const loadModules = async () => {
     try {
-      setLoading(true);
-      setError(null);
       const data = await moduleApi.list();
       setModules(data);
-    } catch (err) {
-      setError('Не удалось загрузить список модулей');
+    } catch (err: any) {
+      const errorMessage = err?.response?.data?.message || err?.message || 'Не удалось загрузить список модулей';
+      setError(errorMessage);
       console.error(err);
-    } finally {
-      setLoading(false);
     }
   };
 
-  const handleAddRule = (rule: Omit<AutomationRule, 'id'>) => {
-    const newRule: AutomationRule = {
-      ...rule,
-      id: nextRuleId++
-    };
-    automationRules = [...automationRules, newRule];
-    setRules([...automationRules]);
-    setShowAddRule(false);
+  const loadRules = async () => {
+    try {
+      const data = await automationApi.list();
+      setRules(data);
+    } catch (err: any) {
+      const errorMessage = err?.response?.data?.message || err?.message || 'Не удалось загрузить правила автоматизации';
+      setError(errorMessage);
+      console.error(err);
+    }
   };
 
-  const handleDeleteRule = (ruleId: number) => {
-    automationRules = automationRules.filter(r => r.id !== ruleId);
-    setRules([...automationRules]);
+  const handleAddRule = async (rule: Omit<AutomationRule, 'id'>) => {
+    try {
+      setError(null);
+      const created = await automationApi.create(rule);
+      setRules((prev) => [...prev, created]);
+      setShowAddRule(false);
+    } catch (err: any) {
+      const errorMessage = err?.response?.data?.message || err?.message || 'Не удалось создать правило';
+      setError(errorMessage);
+      console.error(err);
+    }
   };
 
-  const handleToggleRule = (ruleId: number) => {
-    automationRules = automationRules.map(r =>
-      r.id === ruleId ? { ...r, enabled: !r.enabled } : r
-    );
-    setRules([...automationRules]);
+  const handleDeleteRule = async (ruleId: number) => {
+    try {
+      setError(null);
+      await automationApi.delete(ruleId);
+      setRules((prev) => prev.filter((r) => r.id !== ruleId));
+    } catch (err: any) {
+      const errorMessage = err?.response?.data?.message || err?.message || 'Не удалось удалить правило';
+      setError(errorMessage);
+      console.error(err);
+    }
+  };
+
+  const handleToggleRule = async (ruleId: number) => {
+    try {
+      setError(null);
+      const updated = await automationApi.toggle(ruleId);
+      setRules((prev) => prev.map((r) => (r.id === ruleId ? updated : r)));
+    } catch (err: any) {
+      const errorMessage = err?.response?.data?.message || err?.message || 'Не удалось переключить правило';
+      setError(errorMessage);
+      console.error(err);
+    }
   };
 
   if (loading) {
@@ -99,4 +128,3 @@ function ControlPage() {
 }
 
 export default ControlPage;
-
