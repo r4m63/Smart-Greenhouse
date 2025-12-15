@@ -143,4 +143,3 @@ export const automationApi = {
     return response.data;
   }
 };
-

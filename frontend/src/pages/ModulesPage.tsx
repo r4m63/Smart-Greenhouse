@@ -70,6 +70,19 @@ function ModulesPage() {
     }
   };
 
+  const handleDelete = async (moduleId: number) => {
+    try {
+      setError(null);
+      await moduleApi.delete(moduleId);
+      setSelectedModule(null);
+      await loadModules();
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.message || err.message || 'Не удалось удалить модуль';
+      setError(errorMessage);
+      console.error(err);
+    }
+  };
+
   if (loading) {
     return <div className="loading">Загрузка...</div>;
   }
@@ -106,6 +119,7 @@ function ModulesPage() {
           module={selectedModule}
           onClose={() => setSelectedModule(null)}
           onSync={handleSync}
+          onDelete={handleDelete}
         />
       )}
 

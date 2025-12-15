@@ -8,9 +8,10 @@ interface ModuleDetailsModalProps {
   module: ModuleDetails;
   onClose: () => void;
   onSync: (moduleId: number) => void;
+  onDelete?: (moduleId: number) => void;
 }
 
-function ModuleDetailsModal({ module, onClose, onSync }: ModuleDetailsModalProps) {
+function ModuleDetailsModal({ module, onClose, onSync, onDelete }: ModuleDetailsModalProps) {
   const [moduleDetails, setModuleDetails] = useState<ModuleDetails>(module);
   const [drivers, setDrivers] = useState<Driver[]>([]);
   const [ports, setPorts] = useState<Port[]>([]);
@@ -90,9 +91,23 @@ function ModuleDetailsModal({ module, onClose, onSync }: ModuleDetailsModalProps
               <span className="info-label">Base URL:</span>
               <span className="info-value" style={{ fontSize: '0.9rem' }}>{moduleDetails.baseUrl}</span>
             </div>
-            <button className="button" onClick={handleSync}>
-              Синхронизировать
-            </button>
+            <div className="module-actions">
+              <button className="button" onClick={handleSync}>
+                Синхронизировать
+              </button>
+              {onDelete && (
+                <button 
+                  className="button button-danger" 
+                  onClick={() => {
+                    if (window.confirm(`Вы уверены, что хотите удалить модуль "${moduleDetails.name || `#${moduleDetails.moduleUid}`}"?`)) {
+                      onDelete(module.id);
+                    }
+                  }}
+                >
+                  Удалить модуль
+                </button>
+              )}
+            </div>
           </div>
 
           {loading ? (
