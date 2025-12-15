@@ -12,6 +12,7 @@ import com.greenhouse.repository.AutomationRuleRepository;
 import com.greenhouse.repository.ModuleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,9 @@ public class AutomationRuleService {
     private final AutomationRuleRepository ruleRepository;
     private final ModuleRepository moduleRepository;
     private final EspModuleService espModuleService;
+
+    @Value("${app.rules.off-level:0}")
+    private int offLevel;
 
     public AutomationRuleService(AutomationRuleRepository ruleRepository,
                                   ModuleRepository moduleRepository,
@@ -139,19 +143,24 @@ public class AutomationRuleService {
 
         boolean conditionMet = checkCondition(value, rule.getConditionType(), rule.getThreshold());
 
-        if (conditionMet) {
-            String targetBaseUrl = rule.getTargetModule().getBaseUrl();
-            int targetPortId = rule.getTargetPortId();
-            int actionLevel = rule.getActionLevel();
+        String targetBaseUrl = rule.getTargetModule().getBaseUrl();
+        int targetPortId = rule.getTargetPortId();
 
+        if (conditionMet) {
+            int actionLevel = rule.getActionLevel();
             espModuleService.write(targetBaseUrl, targetPortId, actionLevel);
             log.info("Rule id={} triggered: value={} {} threshold={}, wrote level={} to port={}",
                     rule.getId(), value, DtoMapper.conditionToString(rule.getConditionType()),
                     rule.getThreshold(), actionLevel, targetPortId);
             return true;
+        } else {
+            // Condition is not met: ensure target is turned off
+            espModuleService.write(targetBaseUrl, targetPortId, offLevel);
+            log.debug("Rule id={} not triggered: value={} not {} threshold={}, wrote off-level={} to port={}",
+                    rule.getId(), value, DtoMapper.conditionToString(rule.getConditionType()),
+                    rule.getThreshold(), offLevel, targetPortId);
+            return false;
         }
-
-        return false;
     }
 
     private boolean checkCondition(double value, ConditionType conditionType, double threshold) {
