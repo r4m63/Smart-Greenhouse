@@ -23,6 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.hibernate.orm:hibernate-community-dialects")
+    implementation("org.apache.httpcomponents.client5:httpclient5")
     runtimeOnly("org.xerial:sqlite-jdbc")
     compileOnly("org.projectlombok:lombok:1.18.26")
     annotationProcessor("org.projectlombok:lombok:1.18.26")
