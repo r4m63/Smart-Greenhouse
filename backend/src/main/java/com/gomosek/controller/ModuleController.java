@@ -10,6 +10,7 @@ import com.gomosek.dto.WriteRequest;
 import com.gomosek.service.ModuleService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,5 +79,11 @@ public class ModuleController {
                       @PathVariable Integer portId,
                       @Valid @RequestBody WriteRequest request) {
         moduleService.write(moduleId, portId, request.level());
+    }
+
+    @DeleteMapping("/{moduleId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long moduleId) {
+        moduleService.delete(moduleId);
     }
 }

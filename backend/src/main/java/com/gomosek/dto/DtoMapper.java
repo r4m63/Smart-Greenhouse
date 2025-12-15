@@ -1,6 +1,8 @@
 package com.gomosek.dto;
 
+import com.gomosek.entity.AutomationRuleEntity;
 import com.gomosek.entity.BindingEntity;
+import com.gomosek.entity.ConditionType;
 import com.gomosek.entity.DriverEntity;
 import com.gomosek.entity.MeasurementEntity;
 import com.gomosek.entity.ModuleEntity;
@@ -74,5 +76,42 @@ public final class DtoMapper {
                 measurement.getValue(),
                 measurement.getCreatedAt()
         );
+    }
+
+    public static AutomationRuleDto toAutomationRule(AutomationRuleEntity rule) {
+        return new AutomationRuleDto(
+                rule.getId(),
+                rule.getName(),
+                rule.getSourceModule().getId(),
+                rule.getSourcePortId(),
+                conditionToString(rule.getConditionType()),
+                rule.getThreshold(),
+                rule.getTargetModule().getId(),
+                rule.getTargetPortId(),
+                rule.getActionLevel(),
+                rule.getEnabled(),
+                rule.getCreatedAt()
+        );
+    }
+
+    public static ConditionType stringToCondition(String condition) {
+        return switch (condition.toLowerCase()) {
+            case "gt" -> ConditionType.GT;
+            case "gte" -> ConditionType.GTE;
+            case "lt" -> ConditionType.LT;
+            case "lte" -> ConditionType.LTE;
+            case "eq" -> ConditionType.EQ;
+            default -> throw new IllegalArgumentException("Unknown condition: " + condition);
+        };
+    }
+
+    public static String conditionToString(ConditionType type) {
+        return switch (type) {
+            case GT -> "gt";
+            case GTE -> "gte";
+            case LT -> "lt";
+            case LTE -> "lte";
+            case EQ -> "eq";
+        };
     }
 }

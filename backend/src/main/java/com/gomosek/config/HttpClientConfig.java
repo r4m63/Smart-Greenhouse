@@ -1,9 +1,13 @@
 package com.gomosek.config;
 
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
@@ -17,9 +21,21 @@ public class HttpClientConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setConnectTimeout((int) connectTimeoutMs);
-        factory.setReadTimeout((int) readTimeoutMs);
-        return new RestTemplate(factory);
+        RequestConfig config = RequestConfig.custom()
+                .setExpectContinueEnabled(false)
+                .build();
+
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setDefaultRequestConfig(config)
+                .disableContentCompression()
+                .build();
+
+        HttpComponentsClientHttpRequestFactory base =
+                new HttpComponentsClientHttpRequestFactory(httpClient);
+
+        base.setConnectionRequestTimeout((int) connectTimeoutMs);
+        base.setReadTimeout((int) readTimeoutMs);
+
+        return new RestTemplate(new BufferingClientHttpRequestFactory(base));
     }
 }

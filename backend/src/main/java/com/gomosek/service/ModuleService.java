@@ -16,6 +16,7 @@ import com.gomosek.entity.DriverEntity;
 import com.gomosek.entity.MeasurementEntity;
 import com.gomosek.entity.ModuleEntity;
 import com.gomosek.entity.PortEntity;
+import com.gomosek.repository.AutomationRuleRepository;
 import com.gomosek.repository.BindingRepository;
 import com.gomosek.repository.DriverRepository;
 import com.gomosek.repository.MeasurementRepository;
@@ -23,6 +24,8 @@ import com.gomosek.repository.ModuleRepository;
 import com.gomosek.repository.PortRepository;
 import com.gomosek.exception.NotFoundException;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -37,11 +40,14 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ModuleService {
 
+    private static final Logger log = LoggerFactory.getLogger(ModuleService.class);
+
     private final ModuleRepository moduleRepository;
     private final PortRepository portRepository;
     private final DriverRepository driverRepository;
     private final BindingRepository bindingRepository;
     private final MeasurementRepository measurementRepository;
+    private final AutomationRuleRepository automationRuleRepository;
     private final EspModuleService espModuleService;
 
     public List<ModuleSummaryDto> listModules() {
@@ -168,6 +174,26 @@ public class ModuleService {
         }
         module.setLastSeen(Instant.now());
         moduleRepository.save(module);
+    }
+
+    /**
+     * Удалить модуль и все связанные данные (порты, драйверы, привязки, измерения, правила автоматизации).
+     */
+    public void delete(Long moduleId) {
+        ModuleEntity module = getModule(moduleId);
+
+        // Удаляем правила автоматизации, связанные с этим модулем
+        automationRuleRepository.deleteBySourceModule(module);
+        automationRuleRepository.deleteByTargetModule(module);
+
+        // Удаляем привязки, порты, драйверы (cascade должен работать, но явно для надёжности)
+        bindingRepository.deleteByModule(module);
+        portRepository.deleteByModule(module);
+        driverRepository.deleteByModule(module);
+
+        // Удаляем сам модуль
+        moduleRepository.delete(module);
+        log.info("Deleted module id={}", moduleId);
     }
 
     private ModuleEntity getModule(Long moduleId) {

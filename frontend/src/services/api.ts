@@ -9,7 +9,8 @@ import type {
   WriteRequest,
   Driver,
   Port,
-  ErrorResponse
+  ErrorResponse,
+  AutomationRule
 } from '../types/api';
 
 const api = axios.create({
@@ -95,6 +96,51 @@ export const moduleApi = {
 
   write: async (moduleId: number, portId: number, request: WriteRequest): Promise<void> => {
     await api.post(`/modules/${moduleId}/ports/${portId}/write`, request);
+  },
+
+  delete: async (moduleId: number): Promise<void> => {
+    await api.delete(`/modules/${moduleId}`);
+  }
+};
+
+export const automationApi = {
+  list: async (): Promise<AutomationRule[]> => {
+    const response = await api.get<AutomationRule[]>('/rules');
+    return response.data;
+  },
+
+  getById: async (ruleId: number): Promise<AutomationRule> => {
+    const response = await api.get<AutomationRule>(`/rules/${ruleId}`);
+    return response.data;
+  },
+
+  create: async (rule: Omit<AutomationRule, 'id'>): Promise<AutomationRule> => {
+    const response = await api.post<AutomationRule>('/rules', rule);
+    return response.data;
+  },
+
+  update: async (ruleId: number, rule: Omit<AutomationRule, 'id'>): Promise<AutomationRule> => {
+    const response = await api.put<AutomationRule>(`/rules/${ruleId}`, rule);
+    return response.data;
+  },
+
+  delete: async (ruleId: number): Promise<void> => {
+    await api.delete(`/rules/${ruleId}`);
+  },
+
+  toggle: async (ruleId: number): Promise<AutomationRule> => {
+    const response = await api.post<AutomationRule>(`/rules/${ruleId}/toggle`);
+    return response.data;
+  },
+
+  evaluate: async (ruleId: number): Promise<{ ruleId: number; triggered: boolean }> => {
+    const response = await api.post<{ ruleId: number; triggered: boolean }>(`/rules/${ruleId}/evaluate`);
+    return response.data;
+  },
+
+  evaluateAll: async (): Promise<{ triggeredCount: number }> => {
+    const response = await api.post<{ triggeredCount: number }>('/rules/evaluate');
+    return response.data;
   }
 };
 

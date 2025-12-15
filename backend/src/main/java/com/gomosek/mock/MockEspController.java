@@ -131,4 +131,37 @@ public class MockEspController {
     public void setTemperature(@RequestBody ReadResponse body) {
         portValues.put(1, body.getValue());
     }
+
+    /**
+     * Получить текущее значение на выходном порту (для проверки, что автоматизация записала значение).
+     */
+    @GetMapping("/test/output")
+    public ReadResponse getOutputLevel() {
+        ReadResponse r = new ReadResponse();
+        r.setValue(portValues.getOrDefault(2, 0.0));
+        return r;
+    }
+
+    /**
+     * Сбросить состояние мока (для тестов).
+     */
+    @PostMapping("/test/reset")
+    @ResponseStatus(HttpStatus.OK)
+    public void reset() {
+        portValues.clear();
+        portBindings.clear();
+        portValues.put(1, 21.5);
+        portValues.put(2, 0.0);
+    }
+
+    /**
+     * Получить все текущие значения портов (для отладки).
+     */
+    @GetMapping("/test/state")
+    public Map<String, Object> getState() {
+        Map<String, Object> state = new HashMap<>();
+        state.put("portValues", new HashMap<>(portValues));
+        state.put("portBindings", new HashMap<>(portBindings));
+        return state;
+    }
 }
