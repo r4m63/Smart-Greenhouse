@@ -1,4 +1,4 @@
-# Smart Greenhouse
+<h1 align="center">Smart Greenhouse</h1>
 
 <p align="center">
   <i>Автоматизированная теплица на Raspberry Pi 5 и модулях ESP8266</i>
@@ -10,6 +10,18 @@
   </a>
   <a href="https://img.shields.io/badge/backend-Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white">
     <img src="https://img.shields.io/badge/backend-Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white" alt="spring boot" style="height: 20px;">
+  </a>
+  <a href="https://img.shields.io/badge/frontend-React-61DAFB?style=flat-square&logo=react&logoColor=black">
+    <img src="https://img.shields.io/badge/frontend-React-61DAFB?style=flat-square&logo=react&logoColor=black" alt="react" style="height: 20px;">
+  </a>
+  <a href="https://img.shields.io/badge/build-Vite-646CFF?style=flat-square&logo=vite&logoColor=white">
+    <img src="https://img.shields.io/badge/build-Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="vite" style="height: 20px;">
+  </a>
+  <a href="https://img.shields.io/badge/lang-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white">
+    <img src="https://img.shields.io/badge/lang-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="typescript" style="height: 20px;">
+  </a>
+  <a href="https://img.shields.io/badge/db-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white">
+    <img src="https://img.shields.io/badge/db-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="sqlite" style="height: 20px;">
   </a>
   <a href="https://img.shields.io/badge/hardware-Raspberry%20Pi%205-critical?style=flat-square&logo=raspberrypi&logoColor=white">
     <img src="https://img.shields.io/badge/hardware-Raspberry%20Pi%205-critical?style=flat-square&logo=raspberrypi&logoColor=white" alt="raspberry pi" style="height: 20px;">
