@@ -132,24 +132,29 @@ npm start
 - Ступин Тимур — 3D, железо
 
 <p align="center" style="margin-top: 12px;">
-  <a href="https://github.com/nikita-vasilyev005" title="Васильев Никита — фронтенд">
-    <img src="https://github.com/nikita-vasilyev005.png?size=120" width="96" height="96" style="border-radius: 12px;" alt="Васильев Никита"/>
+  <a href="https://github.com/kihort-si" title="Васильев Никита — фронтенд">
+    <img src="https://github.com/kihort-si.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Васильев Никита"/>
+    <br/><sub>@nikita-vasilyev005</sub>
   </a>
   &nbsp;&nbsp;&nbsp;
   <a href="https://github.com/palloHiiri" title="Брель Мария — фронтенд">
-    <img src="https://github.com/palloHiiri.png?size=120" width="96" height="96" style="border-radius: 12px;" alt="Брель Мария"/>
+    <img src="https://github.com/palloHiiri.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Брель Мария"/>
+    <br/><sub>@palloHiiri</sub>
   </a>
   &nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/tajeddinov" title="Таджединов Рамиль — бэкэнд/железо">
-    <img src="https://github.com/tajeddinov.png?size=120" width="96" height="96" style="border-radius: 12px;" alt="Таджединов Рамиль"/>
+  <a href="https://github.com/r4m63" title="Таджединов Рамиль — бэкэнд/железо">
+    <img src="https://github.com/r4m63.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Таджединов Рамиль"/>
+    <br/><sub>@tajeddinov</sub>
   </a>
   &nbsp;&nbsp;&nbsp;
   <a href="https://github.com/Gastozavr" title="Шмунк Андрей — бэкэнд/железо">
-    <img src="https://github.com/Gastozavr.png?size=120" width="96" height="96" style="border-radius: 12px;" alt="Шмунк Андрей"/>
+    <img src="https://github.com/Gastozavr.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Шмунк Андрей"/>
+    <br/><sub>@Gastozavr</sub>
   </a>
   &nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/hache03" title="Ступин Тимур — 3D/железо">
-    <img src="https://github.com/hache03.png?size=120" width="96" height="96" style="border-radius: 12px;" alt="Ступин Тимур"/>
+  <a href="https://github.com/timur1516" title="Ступин Тимур — 3D/железо">
+    <img src="https://github.com/timur1516.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Ступин Тимур"/>
+    <br/><sub>@hache03</sub>
   </a>
 </p>
 
