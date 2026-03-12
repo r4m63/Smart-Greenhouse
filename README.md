@@ -132,29 +132,25 @@ npm start
 - Ступин Тимур — 3D, железо
 
 <p align="center" style="margin-top: 12px;">
-  <a href="https://github.com/kihort-si" title="Васильев Никита — фронтенд">
+  <a href="https://github.com/kihort-si" title="Васильев Никита — фронтенд" style="display: inline-block; text-align: center; margin: 0 10px;">
     <img src="https://github.com/kihort-si.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Васильев Никита"/>
-    <br/><sub>@nikita-vasilyev005</sub>
+    <br/><sub>@kihort-si</sub>
   </a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/palloHiiri" title="Брель Мария — фронтенд">
+  <a href="https://github.com/palloHiiri" title="Брель Мария — фронтенд" style="display: inline-block; text-align: center; margin: 0 10px;">
     <img src="https://github.com/palloHiiri.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Брель Мария"/>
     <br/><sub>@palloHiiri</sub>
   </a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/r4m63" title="Таджединов Рамиль — бэкэнд/железо">
+  <a href="https://github.com/r4m63" title="Таджединов Рамиль — бэкэнд/железо" style="display: inline-block; text-align: center; margin: 0 10px;">
     <img src="https://github.com/r4m63.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Таджединов Рамиль"/>
-    <br/><sub>@tajeddinov</sub>
+    <br/><sub>@r4m63</sub>
   </a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/Gastozavr" title="Шмунк Андрей — бэкэнд/железо">
+  <a href="https://github.com/Gastozavr" title="Шмунк Андрей — бэкэнд/железо" style="display: inline-block; text-align: center; margin: 0 10px;">
     <img src="https://github.com/Gastozavr.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Шмунк Андрей"/>
     <br/><sub>@Gastozavr</sub>
   </a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/timur1516" title="Ступин Тимур — 3D/железо">
+  <a href="https://github.com/timur1516" title="Ступин Тимур — 3D/железо" style="display: inline-block; text-align: center; margin: 0 10px;">
     <img src="https://github.com/timur1516.png?size=120" width="80" height="80" style="border-radius: 12px;" alt="Ступин Тимур"/>
-    <br/><sub>@hache03</sub>
+    <br/><sub>@timur1516</sub>
   </a>
 </p>
 
